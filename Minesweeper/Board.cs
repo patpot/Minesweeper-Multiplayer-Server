@@ -42,7 +42,7 @@ namespace Minesweeper
                         continue;
                     else
                     {
-                        BoardPositions[randomX, randomY].CurrentTileType = Tile.TileType.Mine;
+                        BoardPositions[randomX, randomY].IsMine = true;
                         validPos = true;
                     }
                 }
@@ -65,7 +65,7 @@ namespace Minesweeper
                         if (xPos >= 0 && xPos <= 9 && yPos >= 0 && yPos <= 9)
                         {
                             tileToCheck.AdjacentTiles.Add(BoardPositions[xPos, yPos]);
-                            if (BoardPositions[xPos, yPos].CurrentTileType == Tile.TileType.Mine)
+                            if (BoardPositions[xPos, yPos].IsMine)
                                 numMines++;
                         }
 
@@ -84,7 +84,7 @@ namespace Minesweeper
             TilesCheckedThisTurn.Clear();
         }
 
-        public bool IsMine(int x, int y) => BoardPositions[x, y].CurrentTileType == Tile.TileType.Mine;
+        public bool IsMine(int x, int y) => BoardPositions[x, y].IsMine;
 
     }
 
@@ -95,6 +95,7 @@ namespace Minesweeper
         public int NumberOfAdjacentMines;
         public int X;
         public int Y;
+        public bool IsMine;
         public TileType CurrentTileType = TileType.Unrevealed;
 
         public Tile(Board board, int x, int y)
@@ -108,7 +109,7 @@ namespace Minesweeper
         {
             if (CurrentTileType == TileType.Flag) return; //If there's a flag, don't do anything
 
-            if (CurrentTileType == TileType.Mine)
+            if (IsMine)
             {
                 // Lose
             }
@@ -153,7 +154,6 @@ namespace Minesweeper
         {
             Unrevealed,
             Revealed,
-            Mine,
             Flag
         }
     }
