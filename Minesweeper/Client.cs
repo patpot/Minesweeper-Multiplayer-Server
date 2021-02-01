@@ -69,7 +69,7 @@ namespace Minesweeper
                     int _byteLength = _stream.EndRead(_result);
                     if (_byteLength <= 0)
                     {
-
+                        Server.Clients[_id]._disconnect();
                         return;
                     }
 
@@ -82,7 +82,7 @@ namespace Minesweeper
                 catch (Exception _ex)
                 {
                     Console.Write($"Error receiving TCP data: {_ex}");
-
+                    Disconnect();
                 }
             }
 
@@ -130,6 +130,16 @@ namespace Minesweeper
 
                 return false;
             }
+
+            public void Disconnect()
+            {
+                Socket.Close();
+                _stream = null;
+                _receivedData = null;
+                _receiveBuffer = null;
+                Socket = null;
+                ServerSend.PlayerDisconnect(_id);
+            }
         }
 
         public void SendIntoGame(string _playerName, int boardX, int boardY)
@@ -155,6 +165,14 @@ namespace Minesweeper
         public void StartGame()
         {
             ServerSend.StartGame(Id);
+        }
+
+        private void _disconnect()
+        {
+            Console.WriteLine($"{Tcp.Socket.Client.RemoteEndPoint} has disconnected.");
+
+            Board = null;
+            Tcp.Disconnect();
         }
     }
 }

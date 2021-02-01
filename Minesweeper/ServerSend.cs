@@ -91,5 +91,15 @@ namespace Minesweeper
                 SendTCPDataToAll( _packet);
             }
         }
+
+        public static void PlayerDisconnect(int _dcdClient)
+        {
+            using (Packet _packet = new Packet((int)ServerPackets.CLIENT_DISCONNECT))
+            {
+                _packet.Write(_dcdClient);
+
+                SendTCPDataToAll(_packet);
+            }
+        }
     }
 }
