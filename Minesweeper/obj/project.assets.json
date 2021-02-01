@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pitpa\\Desktop\\Minesweeper Multiplayer\\Server\\Minesweeper\\Minesweeper\\Minesweeper.csproj",
+      "projectUniqueName": "C:\\Users\\pitpa\\Desktop\\Minesweeper Multiplayer\\Minesweeper-Multiplayer-Server\\Minesweeper\\Minesweeper.csproj",
       "projectName": "Minesweeper",
-      "projectPath": "C:\\Users\\pitpa\\Desktop\\Minesweeper Multiplayer\\Server\\Minesweeper\\Minesweeper\\Minesweeper.csproj",
+      "projectPath": "C:\\Users\\pitpa\\Desktop\\Minesweeper Multiplayer\\Minesweeper-Multiplayer-Server\\Minesweeper\\Minesweeper.csproj",
       "packagesPath": "C:\\Users\\pitpa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pitpa\\Desktop\\Minesweeper Multiplayer\\Server\\Minesweeper\\Minesweeper\\obj\\",
+      "outputPath": "C:\\Users\\pitpa\\Desktop\\Minesweeper Multiplayer\\Minesweeper-Multiplayer-Server\\Minesweeper\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pitpa\\AppData\\Roaming\\NuGet\\NuGet.Config",
