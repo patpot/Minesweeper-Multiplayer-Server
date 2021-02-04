@@ -79,7 +79,6 @@ namespace Minesweeper
         {
             if (!GameStarted) return;
 
-            //Logic
             BoardPositions[x, y].RevealTile();
             TilesCheckedThisTurn.Clear();
         }
@@ -112,6 +111,7 @@ namespace Minesweeper
             if (IsMine)
             {
                 // Lose
+                ServerSend.PlayerHitMine(Board.Id);
             }
             else
             {

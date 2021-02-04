@@ -102,5 +102,24 @@ namespace Minesweeper
                 SendTCPDataToAll(_packet);
             }
         }
+
+        public static void PlayerHitMine(int _playerId)
+        {
+            bool _gameOver = false;
+            //If one of the boards was already ended then this is the second player hitting a mine and therefore gameover 
+            foreach (var clients in Server.Clients.Values)
+                if (clients.Board.GameStarted == false)
+                    _gameOver = true;
+
+            using (Packet _packet = new Packet((int)ServerPackets.PLAYER_HIT_MINE))
+            {
+                _packet.Write(_playerId);
+                _packet.Write(_gameOver);
+
+                SendTCPDataToAll(_packet);
+            }
+            //Needs to be done here for the first logic check to work
+            Server.Clients[_playerId].Board.GameStarted = false;
+        }
     }
 }
