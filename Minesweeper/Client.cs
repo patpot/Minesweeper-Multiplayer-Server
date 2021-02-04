@@ -162,10 +162,7 @@ namespace Minesweeper
             }
         }
 
-        public void StartGame()
-        {
-            ServerSend.StartGame(Id);
-        }
+        public void StartGame() => ServerSend.StartGame(Id);
 
         private void _disconnect()
         {

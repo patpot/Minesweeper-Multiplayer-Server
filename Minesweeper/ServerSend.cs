@@ -61,6 +61,7 @@ namespace Minesweeper
         {
             using (Packet _packet = new Packet((int)ServerPackets.START_GAME))
             {
+                _packet.Write(_toClient);
                 SendTCPData(_toClient, _packet);
             }
         }
