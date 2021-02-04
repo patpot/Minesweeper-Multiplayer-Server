@@ -107,7 +107,6 @@ namespace Minesweeper
 
         public void RevealTile()
         {
-            if (!Board.GameStarted) return;
             if (CurrentTileType == TileType.Flag) return; //If there's a flag, don't do anything
 
             if (IsMine)
