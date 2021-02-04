@@ -119,7 +119,19 @@ namespace Minesweeper
                 SendTCPDataToAll(_packet);
             }
             //Needs to be done here for the first logic check to work
+            SendMessage(time: 3f, message: $"{Server.Clients[_playerId].Username} has hit a mine");
             Server.Clients[_playerId].Board.GameStarted = false;
+        }
+
+        public static void SendMessage(float time, string message)
+        {
+            using (Packet _packet = new Packet((int)ServerPackets.SEND_MESSAGE))
+            {
+                _packet.Write(time);
+                _packet.Write(message);
+
+                SendTCPDataToAll(_packet);
+            }
         }
     }
 }

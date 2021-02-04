@@ -11,6 +11,7 @@ namespace Minesweeper
     {
         public static int DataBufferSize = 4096;
         public int Id;
+        public string Username;
         public Board Board;
         public TCP Tcp;
         

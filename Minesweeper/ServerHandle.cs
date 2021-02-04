@@ -11,6 +11,11 @@ namespace Minesweeper
         {
             int _clientIdCheck = _packet.ReadInt();
             string _username = _packet.ReadString();
+            if (_username.Length > 12)
+            {
+                Server.Clients[_fromClient].Tcp.Disconnect();
+                return;
+            }
             int boardX = 10; //Temp
             int boardY = 10; //Temp
 
@@ -21,6 +26,7 @@ namespace Minesweeper
             }
 
             Console.WriteLine($"{_username} has connected.");
+            Server.Clients[_fromClient].Username = _username;
             Server.Clients[_fromClient].SendIntoGame(_username, boardX, boardY);
         }
         
