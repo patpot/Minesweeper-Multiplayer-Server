@@ -11,6 +11,13 @@ namespace Minesweeper
         public Tile[,] BoardPositions;
         public int NumberOfMines;
 
+        private int _lives = 3;
+        public int Lives 
+        { 
+            get { return _lives; }
+            set { _lives = value; }
+        }
+
         public bool LockedIn;
         public bool GameStarted;
         public List<Tile> TilesCheckedThisTurn = new List<Tile>();
@@ -64,7 +71,7 @@ namespace Minesweeper
                     {
                         int xPos = i + offset.Item1;
                         int yPos = j + offset.Item2;
-                        if (xPos >= 0 && xPos <= 9 && yPos >= 0 && yPos <= 9)
+                        if (xPos >= 0 && xPos < boardX && yPos >= 0 && yPos < boardY)
                         {
                             tileToCheck.AdjacentTiles.Add(BoardPositions[xPos, yPos]);
                             if (BoardPositions[xPos, yPos].IsMine)
@@ -113,7 +120,6 @@ namespace Minesweeper
             if (IsMine)
             {
                 // Lose
-                Board.LockedIn = true;
                 ServerSend.PlayerHitMine(Board.Id);
             }
             else

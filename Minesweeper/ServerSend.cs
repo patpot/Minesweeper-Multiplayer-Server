@@ -105,19 +105,26 @@ namespace Minesweeper
 
         public static void PlayerHitMine(int _playerId)
         {
+            Board thisBoard = Server.Clients[_playerId].Board;
+            thisBoard.Lives -= 1;
             using (Packet _packet = new Packet((int)ServerPackets.PLAYER_HIT_MINE))
             {
                 _packet.Write(_playerId);
+                _packet.Write(thisBoard.Lives);
 
                 SendTCPDataToAll(_packet);
             }
             //If one of the boards was already ended then this is the second player hitting a mine and therefore gameover 
             foreach (var clients in Server.Clients.Values)
-                if (clients.Board.GameStarted == false)
+                if (clients.Board.GameStarted == false && thisBoard.Lives == 0)
                     GameLogic.EndGame();
             //Needs to be done here for the first logic check to work
             SendMessage(time: 3f, message: $"{Server.Clients[_playerId].Username} has hit a mine");
-            Server.Clients[_playerId].Board.GameStarted = false;
+            if (thisBoard.Lives == 0)
+            {
+                thisBoard.GameStarted = false;
+                thisBoard.LockedIn = true;
+            }
         }
 
         public static void SendMessage(float time, string message)
