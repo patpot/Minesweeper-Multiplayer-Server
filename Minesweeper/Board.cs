@@ -10,6 +10,8 @@ namespace Minesweeper
         public string Username;
         public Tile[,] BoardPositions;
         public int NumberOfMines;
+
+        public bool LockedIn;
         public bool GameStarted;
         public List<Tile> TilesCheckedThisTurn = new List<Tile>();
         public int FlagsLeft;
@@ -77,7 +79,7 @@ namespace Minesweeper
 
         public void RevealTile(int x, int y)
         {
-            if (!GameStarted) return;
+            if (!GameStarted || LockedIn) return;
 
             BoardPositions[x, y].RevealTile();
             TilesCheckedThisTurn.Clear();
@@ -111,6 +113,7 @@ namespace Minesweeper
             if (IsMine)
             {
                 // Lose
+                Board.LockedIn = true;
                 ServerSend.PlayerHitMine(Board.Id);
             }
             else
@@ -133,7 +136,7 @@ namespace Minesweeper
 
         public void SetFlag()
         {
-            if (!Board.GameStarted) return;
+            if (!Board.GameStarted || Board.LockedIn) return;
             if (CurrentTileType == TileType.Revealed) return;
 
             if (CurrentTileType == TileType.Flag)

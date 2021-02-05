@@ -14,7 +14,9 @@ namespace GameServer
         SEND_FLAG = 5,
         CLIENT_DISCONNECT = 6,
         PLAYER_HIT_MINE = 7,
-        SEND_MESSAGE = 8
+        SEND_MESSAGE = 8,
+        LOCK_IN = 9,
+        GAME_END = 10
     }
 
     /// <summary>Sent from client to server.</summary>
@@ -27,7 +29,9 @@ namespace GameServer
         SEND_FLAG = 5,
         CLIENT_DISCONNECT = 6,
         PLAYER_HIT_MINE = 7,
-        SEND_MESSAGE = 8
+        SEND_MESSAGE = 8,
+        LOCK_IN = 9,
+        GAME_END = 10
     }
 
     public class Packet : IDisposable

@@ -16,8 +16,8 @@ namespace Minesweeper
                 Server.Clients[_fromClient].Tcp.Disconnect();
                 return;
             }
-            int boardX = 10; //Temp
-            int boardY = 10; //Temp
+            int boardX = 20; //Temp
+            int boardY = 20; //Temp
 
             if (_clientIdCheck != _fromClient)
             {
@@ -79,6 +79,22 @@ namespace Minesweeper
             int x = _packet.ReadInt();
             int y = _packet.ReadInt();
             Server.Clients[_fromClient].Board.BoardPositions[x, y].SetFlag();
+        }
+
+        public static void LockInReceived(int _fromClient, Packet _packet)
+        {
+            int _clientIdCheck = _packet.ReadInt();
+            if (_clientIdCheck != _fromClient)
+            {
+                Console.WriteLine("What the fuck guys");
+                return;
+            }
+
+            foreach (var client in Server.Clients)
+                if (client.Value.Board.LockedIn)
+                    GameLogic.EndGame();
+            Server.Clients[_fromClient].Board.LockedIn = true;
+            Server.Clients[_fromClient].Board.GameStarted = false;
         }
     }
 }

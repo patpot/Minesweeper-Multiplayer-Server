@@ -59,7 +59,8 @@ namespace Minesweeper
                 {(int)ServerPackets.WELCOME, ServerHandle.WelcomeReceived },
                 {(int)ServerPackets.SPAWN_PLAYER, ServerHandle.SpawnReceived },
                 {(int)ClientPackets.SEND_REVEAL_TILE, ServerHandle.RevealTileReceived },
-                {(int)ClientPackets.SEND_FLAG, ServerHandle.SendFlagReceived }
+                {(int)ClientPackets.SEND_FLAG, ServerHandle.SendFlagReceived },
+                {(int)ClientPackets.LOCK_IN, ServerHandle.LockInReceived }
             };
 
             Console.WriteLine("Initalized packets.");
